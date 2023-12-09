@@ -1,4 +1,4 @@
-package com.imtuc.stressid
+package com.imtuc.stressid.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
