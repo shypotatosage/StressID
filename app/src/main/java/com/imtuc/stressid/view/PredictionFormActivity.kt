@@ -106,6 +106,7 @@ fun PredictionFormActivity(
     predictionViewModel.prediction.observe(lifecycleOwner, Observer {
             response ->
         showResult.value = predictionViewModel.prediction.value.toString()
+        result.value = true
     })
 
     Column(
