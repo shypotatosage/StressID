@@ -55,7 +55,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-//                    Greeting("Android")
+                    inputData(predictionViewModel = predictViewModel)
                 }
             }
         }
@@ -65,8 +65,8 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun inputData(
     predictionViewModel: PredictionViewModel,
-    lifecycleOwner: LifecycleOwner,
-    navController: NavController
+//    lifecycleOwner: LifecycleOwner,
+//    navController: NavController
 ) {
     val context = LocalContext.current
 
@@ -336,24 +336,12 @@ fun inputData(
     }
 
 
-private fun validateInput(
-    anxietyLevel: String,
-    selfEsteem: String,
-    // ... (repeat for other variables)
-): Boolean {
-    return anxietyLevel.isNotBlank() &&
-            selfEsteem.isNotBlank()
-}
-@Composable
-fun ProvideWindowInsets(windowInsetsAnimationsEnabled: Boolean, content: () -> Unit) {
-
-}
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     StressIDTheme {
-
+//        inputData(predictionViewModel = )
     }
 }
 //fun GreetingPreview() {
