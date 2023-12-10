@@ -48,7 +48,7 @@ class PredictionViewModel @Inject constructor(
         repo.predict(anxietyLevel, selfEsteem, mentalHealthHistory, depression, headache, bloodPressure, sleepQuality, breathingProblem, noiseLevel, livingConditions, safety, basicNeeds, academicPerformance, studyLoad, teacherStudentRelationship, futureCareerConcerns, socialSupport, peerPressure, extracurricularActivities, bullying).let {
                 response ->
             if (response.isSuccessful) {
-                _prediction.value = response.body()?.get("result")!!.asString
+                _prediction.value = response.body()?.get("result")?.asInt.toString()
                 Log.d("Predicted Result", response.body().toString())
             } else {
                 _prediction.value = response.message()

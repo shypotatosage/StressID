@@ -105,7 +105,7 @@ fun PredictionFormActivity(
 
     predictionViewModel.prediction.observe(lifecycleOwner, Observer {
             response ->
-        showResult.value = predictionViewModel.prediction.toString()
+        showResult.value = predictionViewModel.prediction.value.toString()
     })
 
     Column(
@@ -311,7 +311,7 @@ fun PredictionFormActivity(
         }
 
         if (result.value == true){
-            Text("${showResult}")
+            Text("${showResult.value}")
         }
 
 
