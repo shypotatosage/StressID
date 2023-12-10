@@ -19,10 +19,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
+
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.imtuc.stressid.navigation.SetupNavGraph
+
 import com.imtuc.stressid.ui.theme.StressIDTheme
 import com.imtuc.stressid.viewmodel.PredictionViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,12 +35,16 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     private lateinit var predictViewModel: PredictionViewModel
+
+    lateinit var navController: NavHostController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         predictViewModel = ViewModelProvider(this)[PredictionViewModel::class.java]
         setContent {
             StressIDTheme {
+
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -334,6 +343,14 @@ fun ProvideWindowInsets(windowInsetsAnimationsEnabled: Boolean, content: () -> U
 @Composable
 fun GreetingPreview() {
     StressIDTheme {
-//        Greeting("Android")
+                navController = rememberNavController()
+
+                SetupNavGraph(
+                    navController = navController,
+                    lifecycleOwner = this
+                )
+            }
+        }
     }
+
 }
