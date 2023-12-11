@@ -198,6 +198,8 @@ fun PredictionFormActivity(
             .padding(16.dp)
             .verticalScroll(rememberScrollState())
     ) {
+        Text("Lets Predict Your Conditions!")
+        Text("Try to input your conditions based on the questions below. Put Higher number the more your felt the questions effects you")
         Text("Anxiety Level:")
         Box(
             modifier = Modifier
