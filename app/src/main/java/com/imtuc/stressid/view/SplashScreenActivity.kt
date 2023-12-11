@@ -57,7 +57,7 @@ fun SplashScreen(alpha: Float) {
             modifier = Modifier
                 .fillMaxSize()
                 .alpha(alpha)
-                .padding(0.dp, 0.dp, 0.dp, 75.dp),
+                .padding(0.dp, 0.dp, 0.dp, 0.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {

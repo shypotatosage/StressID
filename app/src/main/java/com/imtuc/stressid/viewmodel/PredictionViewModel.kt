@@ -56,4 +56,8 @@ class PredictionViewModel @Inject constructor(
             }
         }
     }
+
+    fun resetPrediction() {
+        _prediction.value = null
+    }
 }

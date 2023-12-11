@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -72,9 +73,9 @@ fun ResultActivity(prediction: String, navController: NavHostController) {
         Text(
             text = resultText,
             style = TextStyle(
-                fontSize = 26.sp,
-                fontWeight = FontWeight.Medium
-            )
+                fontSize = 26.sp
+            ),
+            textAlign = TextAlign.Center
         )
         Spacer(modifier = Modifier.height(24.dp))
         Button(

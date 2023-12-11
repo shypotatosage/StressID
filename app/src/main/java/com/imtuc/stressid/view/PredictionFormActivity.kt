@@ -196,15 +196,18 @@ fun PredictionFormActivity(
 
     predictionViewModel.prediction.observe(lifecycleOwner, Observer {
             response ->
-        showResult.value = predictionViewModel.prediction.value.toString()
+        if (response != null) {
+            showResult.value = predictionViewModel.prediction.value.toString()
 
-        navController.popBackStack()
-        navController.navigate(
-            Screen.Result.passParam(
-                showResult.value
+            navController.popBackStack()
+            navController.navigate(
+                Screen.Result.passParam(
+                    showResult.value
+                )
             )
-        )
-//        result.value = true
+
+            predictionViewModel.resetPrediction()
+        }
     })
 
     Column(
@@ -1062,7 +1065,8 @@ fun PredictionFormActivity(
                 "Check",
                 style = TextStyle(
                     fontWeight = FontWeight.SemiBold,
-                    fontSize = 18.sp
+                    fontSize = 18.sp,
+                    color = Color.White
                 )
             )
         }
