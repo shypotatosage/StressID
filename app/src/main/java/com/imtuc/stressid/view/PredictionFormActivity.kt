@@ -181,6 +181,10 @@ fun PredictionFormActivity(
         mutableStateOf(false)
     }
 
+    var expanded_blood by remember {
+        mutableStateOf(false)
+    }
+
     predictionViewModel.prediction.observe(lifecycleOwner, Observer {
             response ->
         showResult.value = predictionViewModel.prediction.value.toString()
@@ -358,6 +362,40 @@ fun PredictionFormActivity(
                 DropdownMenuItem(onClick = {
                     headache.value = i.toString()
                     expanded_h = false
+                }) {
+                    Text("$i", color = Color.Black) // Set the text color to black
+                }
+            }
+        }
+
+        Text("Blood Pressure Level:")
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp)
+                .background(color = Color.White)
+                .clickable { expanded_blood = !expanded_blood } // Toggle dropdown on click
+        ) {
+            Text(
+                text = "${bloodPressure.value}",
+                modifier = Modifier.padding(8.dp),
+                color = Color.Black // Set the text color to black
+            )
+        }
+
+        DropdownMenu(
+            expanded = expanded_blood,
+            onDismissRequest = { expanded_blood = false },
+            modifier = Modifier
+                .background(color = Color.White)
+                .fillMaxWidth(0.875f)
+                .align(alignment = Alignment.CenterHorizontally)
+        ) {
+            // DropdownMenuItems for the anxiety level range
+            for (i in 0..5) {
+                DropdownMenuItem(onClick = {
+                    bloodPressure.value = i.toString()
+                    expanded_blood = false
                 }) {
                     Text("$i", color = Color.Black) // Set the text color to black
                 }
