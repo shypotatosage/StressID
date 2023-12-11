@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -45,13 +46,20 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import com.imtuc.stressid.navigation.Screen
+import com.imtuc.stressid.ui.theme.GrayBorder
+import com.imtuc.stressid.ui.theme.Purple40
 
 
 @Composable
 fun PredictionFormActivity(
     predictionViewModel: PredictionViewModel,
     lifecycleOwner: LifecycleOwner,
+    navController: NavHostController
 ) {
     val context = LocalContext.current
 
@@ -189,24 +197,45 @@ fun PredictionFormActivity(
     predictionViewModel.prediction.observe(lifecycleOwner, Observer {
             response ->
         showResult.value = predictionViewModel.prediction.value.toString()
-        result.value = true
+
+        navController.popBackStack()
+        navController.navigate(
+            Screen.Result.passParam(
+                showResult.value
+            )
+        )
+//        result.value = true
     })
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .padding(24.dp)
             .verticalScroll(rememberScrollState())
     ) {
-        Text("Lets Predict Your Conditions!")
-        Text("Try to input your conditions based on the questions below. Put Higher number the more your felt the questions effects you")
+        Text(
+            "Let's Predict Your Condition!",
+            style = TextStyle(
+                fontSize = 22.sp,
+                fontWeight = FontWeight.SemiBold
+            )
+        )
+        Spacer(modifier = Modifier.height(4.dp))
+        Text("Try to input your condition based on the questions below. Select the levels according to your current condition.")
+        Spacer(modifier = Modifier.height(24.dp))
         Text("Anxiety Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded = !expanded }
         ) {
             Text(
@@ -238,13 +267,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_sE = !expanded_sE }
         ) {
             Text(
-                text = if (selfEsteem.value.isEmpty()) "Self Esteem Level" else "${selfEsteem.value}",
+                text = if (selfEsteem.value.isEmpty()) "Select Self Esteem Level" else "${selfEsteem.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -277,13 +312,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_mH = !expanded_mH }
         ) {
             Text(
-                text = if (mentalHealthHistory.value.isEmpty()) "Mental Health Problems" else "${mentalHealthOptions[mentalHealthHistory.value.toInt()]}",
+                text = if (mentalHealthHistory.value.isEmpty()) "Select Mental Health Problems" else "${mentalHealthOptions[mentalHealthHistory.value.toInt()]}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -311,13 +352,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_d = !expanded_d }
         ) {
             Text(
-                text = if (depression.value.isEmpty()) "Depression Level" else "${depression.value}",
+                text = if (depression.value.isEmpty()) "Select Depression Level" else "${depression.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -346,13 +393,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_h = !expanded_h }
         ) {
             Text(
-                text = if (headache.value.isEmpty()) "Headache Level" else "${headache.value}",
+                text = if (headache.value.isEmpty()) "Select Headache Level" else "${headache.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -389,13 +442,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_blood = !expanded_blood }
         ) {
             Text(
-                text = if (bloodPressure.value.isEmpty()) "Blood Pressure Level" else "${bloodPressureOptions[bloodPressure.value.toInt()]}",
+                text = if (bloodPressure.value.isEmpty()) "Select Blood Pressure Level" else "${bloodPressureOptions[bloodPressure.value.toInt()]}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -423,13 +482,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_sq = !expanded_sq }
         ) {
             Text(
-                text = if (sleepQuality.value.isEmpty()) "Sleep Quality Level" else "${sleepQuality.value}",
+                text = if (sleepQuality.value.isEmpty()) "Select Sleep Quality Level" else "${sleepQuality.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -457,13 +522,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_bp = !expanded_bp }
         ) {
             Text(
-                text = if (breathingProblem.value.isEmpty()) "Breathing Problem Level" else "${breathingProblem.value}",
+                text = if (breathingProblem.value.isEmpty()) "Select Breathing Problem Level" else "${breathingProblem.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -491,13 +562,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_nl = !expanded_nl }
         ) {
             Text(
-                text = if (noiseLevel.value.isEmpty()) "Noise Level" else "${noiseLevel.value}",
+                text = if (noiseLevel.value.isEmpty()) "Select Noise Level" else "${noiseLevel.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -521,17 +598,23 @@ fun PredictionFormActivity(
             }
         }
 
-        Text("living Conditions Level:")
+        Text("Living Conditions Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_lc = !expanded_lc }
         ) {
             Text(
-                text = if (livingConditions.value.isEmpty()) "Living Conditions Level" else "${livingConditions.value}",
+                text = if (livingConditions.value.isEmpty()) "Select Living Conditions Level" else "${livingConditions.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -558,13 +641,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_s = !expanded_s }
         ) {
             Text(
-                text = if (safety.value.isEmpty()) "Safety Level" else "${safety.value}",
+                text = if (safety.value.isEmpty()) "Select Safety Level" else "${safety.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -587,17 +676,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("basic Needs Level:")
+        Text("Basic Needs Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_bn = !expanded_bn }
         ) {
             Text(
-                text = if (basicNeeds.value.isEmpty()) "Basic Needs Level" else "${basicNeeds.value}",
+                text = if (basicNeeds.value.isEmpty()) "Select Basic Needs Level" else "${basicNeeds.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -620,17 +715,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("academic Performances Level:")
+        Text("Academic Performances Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_ap = !expanded_ap }
         ) {
             Text(
-                text = if (academicPerformance.value.isEmpty()) "Academic Performance Level" else "${academicPerformance.value}",
+                text = if (academicPerformance.value.isEmpty()) "Select Academic Performance Level" else "${academicPerformance.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -653,17 +754,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("study Load Level:")
+        Text("Study Load Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_sl = !expanded_sl }
         ) {
             Text(
-                text = if (studyLoad.value.isEmpty()) "Study Load Level" else "${studyLoad.value}",
+                text = if (studyLoad.value.isEmpty()) "Select Study Load Level" else "${studyLoad.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -686,17 +793,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("teacher Student Relationship Level:")
+        Text("Teacher Student Relationship Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_tsr = !expanded_tsr }
         ) {
             Text(
-                text = if (teacherStudentRelationship.value.isEmpty()) "Teacher Student Relationship Level" else "${teacherStudentRelationship.value}",
+                text = if (teacherStudentRelationship.value.isEmpty()) "Select Teacher Student Relationship Level" else "${teacherStudentRelationship.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -719,17 +832,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("future Career Concerns Level:")
+        Text("Future Career Concerns Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_fcc = !expanded_fcc }
         ) {
             Text(
-                text = if (futureCareerConcerns.value.isEmpty()) "Future Career Concerns Level" else "${futureCareerConcerns.value}",
+                text = if (futureCareerConcerns.value.isEmpty()) "Select Future Career Concerns Level" else "${futureCareerConcerns.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -752,17 +871,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("social Support Level:")
+        Text("Social Support Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_ss = !expanded_ss }
         ) {
             Text(
-                text = if (socialSupport.value.isEmpty()) "Social Support Level" else "${socialSupport.value}",
+                text = if (socialSupport.value.isEmpty()) "Select Social Support Level" else "${socialSupport.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -789,13 +914,19 @@ fun PredictionFormActivity(
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_pp = !expanded_pp }
         ) {
             Text(
-                text = if (peerPressure.value.isEmpty()) "Peer Pressure Level" else "${peerPressure.value}",
+                text = if (peerPressure.value.isEmpty()) "Select Peer Pressure Level" else "${peerPressure.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -818,17 +949,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("extracurricular Activities Level:")
+        Text("Extracurricular Activities Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_ea = !expanded_ea }
         ) {
             Text(
-                text = if (extracurricularActivities.value.isEmpty()) "Extra Curricular Activities Level" else "${extracurricularActivities.value}",
+                text = if (extracurricularActivities.value.isEmpty()) "Select Extracurricular Activities Level" else "${extracurricularActivities.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -851,17 +988,23 @@ fun PredictionFormActivity(
                 }
             }
         }
-        Text("bullying Level:")
+        Text("Bullying Level:")
         Box(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(0.dp, 8.dp)
                 .background(color = Color.White)
-                .border(BorderStroke(1.dp, Color.Black))
+                .border(
+                    BorderStroke(
+                        width = 0.85.dp,
+                        color = GrayBorder
+                    ),
+                    shape = RoundedCornerShape(8.dp)
+                )
                 .clickable { expanded_b = !expanded_b }
         ) {
             Text(
-                text = if (bullying.value.isEmpty()) "Bullying Level" else "${bullying.value}",
+                text = if (bullying.value.isEmpty()) "Select Bullying Level" else "${bullying.value}",
                 modifier = Modifier.padding(8.dp),
                 color = Color.Black
             )
@@ -908,24 +1051,31 @@ fun PredictionFormActivity(
                     extracurricularActivities.value.toInt(),
                     bullying.value.toInt(),
                 )
-                result.value = true
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow, contentColor = Color.White),
+                .padding(0.dp, 8.dp),
+            shape = RoundedCornerShape(12.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Purple40, contentColor = Color.Black),
         ) {
-            Text("Check")
+            Text(
+                "Check",
+                style = TextStyle(
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 18.sp
+                )
+            )
         }
-        if (result.value) {
-            val resultText = when (showResult.value.toInt()) {
-                0 -> "You're good!"
-                1 -> "Stress has started to build up, make sure to take a rest"
-                2 -> "You're not in good condition, seek help immediately!"
-                else -> "Unknown result"
-            }
-            Text(resultText)
-        }
+
+//        if (result.value) {
+//            val resultText = when (showResult.value) {
+//                "0" -> "You're good!"
+//                "1" -> "Stress has started to build up, make sure to take a rest"
+//                "2" -> "You're not in good condition, seek help immediately!"
+//                else -> "Unknown result"
+//            }
+//            Text(resultText)
+//        }
 
     }
 }

@@ -3,9 +3,12 @@ package com.imtuc.stressid.navigation
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LifecycleOwner
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
 import com.imtuc.stressid.view.PredictionFormActivity
+import com.imtuc.stressid.view.ResultActivity
 import com.imtuc.stressid.view.SplashScreenActivity
 import com.imtuc.stressid.viewmodel.PredictionViewModel
 
@@ -28,7 +31,18 @@ fun SetupNavGraph(
         composable(
             route = Screen.PredictionForm.route
         ) {
-            PredictionFormActivity(predictionViewModel, lifecycleOwner)
+            PredictionFormActivity(predictionViewModel, lifecycleOwner, navController)
+        }
+
+        composable(
+            route = Screen.Result.route,
+            arguments = listOf(
+                navArgument("prediction") {
+                    type = NavType.StringType
+                }
+            )
+        ) {
+            ResultActivity(prediction = it.arguments?.getString("prediction").toString(), navController)
         }
     }
 }
