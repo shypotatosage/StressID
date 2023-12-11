@@ -23,6 +23,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Button
+import androidx.compose.material.ButtonDefaults
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.LocalTextStyle
@@ -203,12 +204,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded = !expanded } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded = !expanded }
         ) {
             Text(
-                text = "${anxietyLevel.value}",
+                text = if (anxietyLevel.value.isEmpty()) "Select Anxiety Level" else "${anxietyLevel.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -220,13 +222,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..21) {
                 DropdownMenuItem(onClick = {
                     anxietyLevel.value = i.toString()
                     expanded = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -237,12 +238,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_sE = !expanded_sE } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_sE = !expanded_sE }
         ) {
             Text(
-                text = "${selfEsteem.value}",
+                text = if (selfEsteem.value.isEmpty()) "Self Esteem Level" else "${selfEsteem.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -254,16 +256,20 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..30) {
                 DropdownMenuItem(onClick = {
                     selfEsteem.value = i.toString()
                     expanded_sE = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
+
+        var mentalHealthOptions = listOf(
+            "Yes",
+            "No",
+       )
 
         Text("Mental Health History:")
         Box(
@@ -271,12 +277,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_mH = !expanded_mH } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_mH = !expanded_mH }
         ) {
             Text(
-                text = "${mentalHealthHistory.value}",
+                text = if (mentalHealthHistory.value.isEmpty()) "Mental Health Problems" else "${mentalHealthOptions[mentalHealthHistory.value.toInt()]}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -288,13 +295,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
-            for (i in 0..1) {
+           for ((index, option) in mentalHealthOptions.withIndex()) {
                 DropdownMenuItem(onClick = {
-                    mentalHealthHistory.value = i.toString()
+                    mentalHealthHistory.value = index.toString()
                     expanded_mH = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text(option, color = Color.Black)
                 }
             }
         }
@@ -305,12 +311,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_d = !expanded_d } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_d = !expanded_d }
         ) {
             Text(
-                text = "${depression.value}",
+                text = if (depression.value.isEmpty()) "Depression Level" else "${depression.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -322,13 +329,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..27) {
                 DropdownMenuItem(onClick = {
                     depression.value = i.toString()
                     expanded_d = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -340,12 +346,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_h = !expanded_h } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_h = !expanded_h }
         ) {
             Text(
-                text = "${headache.value}",
+                text = if (headache.value.isEmpty()) "Headache Level" else "${headache.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -357,16 +364,24 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     headache.value = i.toString()
                     expanded_h = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
+
+        var bloodPressureOptions = listOf(
+            "<100/<70",
+            "(100 - 120) & (70 - 80)",
+            "(120 - 129) & (70 - 80)",
+            "(130 - 139) / (80 - 89)",
+            "140> / 90>",
+            "180> / 120>"
+        )
 
         Text("Blood Pressure Level:")
         Box(
@@ -374,12 +389,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_blood = !expanded_blood } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_blood = !expanded_blood }
         ) {
             Text(
-                text = "${bloodPressure.value}",
+                text = if (bloodPressure.value.isEmpty()) "Blood Pressure Level" else "${bloodPressureOptions[bloodPressure.value.toInt()]}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -391,13 +407,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
-            for (i in 0..5) {
+            for ((index, option) in bloodPressureOptions.withIndex()) {
                 DropdownMenuItem(onClick = {
-                    bloodPressure.value = i.toString()
+                    bloodPressure.value = index.toString()
                     expanded_blood = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text(option, color = Color.Black)
                 }
             }
         }
@@ -408,12 +423,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_sq = !expanded_sq } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_sq = !expanded_sq }
         ) {
             Text(
-                text = "${sleepQuality.value}",
+                text = if (sleepQuality.value.isEmpty()) "Sleep Quality Level" else "${sleepQuality.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -425,13 +441,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     sleepQuality.value = i.toString()
                     expanded_sq = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -442,12 +457,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_bp = !expanded_bp } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_bp = !expanded_bp }
         ) {
             Text(
-                text = "${breathingProblem.value}",
+                text = if (breathingProblem.value.isEmpty()) "Breathing Problem Level" else "${breathingProblem.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -459,13 +475,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     breathingProblem.value = i.toString()
                     expanded_bp = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -476,12 +491,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_nl = !expanded_nl } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_nl = !expanded_nl }
         ) {
             Text(
-                text = "${noiseLevel.value}",
+                text = if (noiseLevel.value.isEmpty()) "Noise Level" else "${noiseLevel.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -493,13 +509,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     noiseLevel.value = i.toString()
                     expanded_nl = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -510,12 +525,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_lc = !expanded_lc } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_lc = !expanded_lc }
         ) {
             Text(
-                text = "${livingConditions.value}",
+                text = if (livingConditions.value.isEmpty()) "Living Conditions Level" else "${livingConditions.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -527,13 +543,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     livingConditions.value = i.toString()
                     expanded_lc = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -543,12 +558,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_s = !expanded_s } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_s = !expanded_s }
         ) {
             Text(
-                text = "${safety.value}",
+                text = if (safety.value.isEmpty()) "Safety Level" else "${safety.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -560,13 +576,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     safety.value = i.toString()
                     expanded_s = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -576,12 +591,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_bn = !expanded_bn } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_bn = !expanded_bn }
         ) {
             Text(
-                text = "${basicNeeds.value}",
+                text = if (basicNeeds.value.isEmpty()) "Basic Needs Level" else "${basicNeeds.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -593,13 +609,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     basicNeeds.value = i.toString()
                     expanded_bn = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -609,12 +624,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_ap = !expanded_ap } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_ap = !expanded_ap }
         ) {
             Text(
-                text = "${academicPerformance.value}",
+                text = if (academicPerformance.value.isEmpty()) "Academic Performance Level" else "${academicPerformance.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -626,13 +642,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     academicPerformance.value = i.toString()
                     expanded_ap = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -642,12 +657,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_sl = !expanded_sl } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_sl = !expanded_sl }
         ) {
             Text(
-                text = "${studyLoad.value}",
+                text = if (studyLoad.value.isEmpty()) "Study Load Level" else "${studyLoad.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -659,13 +675,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     studyLoad.value = i.toString()
                     expanded_sl = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -675,12 +690,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_tsr = !expanded_tsr } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_tsr = !expanded_tsr }
         ) {
             Text(
-                text = "${teacherStudentRelationship.value}",
+                text = if (teacherStudentRelationship.value.isEmpty()) "Teacher Student Relationship Level" else "${teacherStudentRelationship.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -692,13 +708,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     teacherStudentRelationship.value = i.toString()
                     expanded_tsr = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -708,12 +723,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_fcc = !expanded_fcc } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_fcc = !expanded_fcc }
         ) {
             Text(
-                text = "${futureCareerConcerns.value}",
+                text = if (futureCareerConcerns.value.isEmpty()) "Future Career Concerns Level" else "${futureCareerConcerns.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -725,13 +741,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     futureCareerConcerns.value = i.toString()
                     expanded_fcc = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -741,12 +756,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_ss = !expanded_ss } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_ss = !expanded_ss }
         ) {
             Text(
-                text = "${socialSupport.value}",
+                text = if (socialSupport.value.isEmpty()) "Social Support Level" else "${socialSupport.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -758,13 +774,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     socialSupport.value = i.toString()
                     expanded_ss = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -774,12 +789,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_pp = !expanded_pp } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_pp = !expanded_pp }
         ) {
             Text(
-                text = "${peerPressure.value}",
+                text = if (peerPressure.value.isEmpty()) "Peer Pressure Level" else "${peerPressure.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -791,13 +807,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     peerPressure.value = i.toString()
                     expanded_pp = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -807,12 +822,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_ea = !expanded_ea } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_ea = !expanded_ea }
         ) {
             Text(
-                text = "${extracurricularActivities.value}",
+                text = if (extracurricularActivities.value.isEmpty()) "Extra Curricular Activities Level" else "${extracurricularActivities.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -824,13 +840,12 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     extracurricularActivities.value = i.toString()
                     expanded_ea = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
@@ -840,12 +855,13 @@ fun PredictionFormActivity(
                 .fillMaxWidth()
                 .padding(8.dp)
                 .background(color = Color.White)
-                .clickable { expanded_b = !expanded_b } // Toggle dropdown on click
+                .border(BorderStroke(1.dp, Color.Black))
+                .clickable { expanded_b = !expanded_b }
         ) {
             Text(
-                text = "${bullying.value}",
+                text = if (bullying.value.isEmpty()) "Bullying Level" else "${bullying.value}",
                 modifier = Modifier.padding(8.dp),
-                color = Color.Black // Set the text color to black
+                color = Color.Black
             )
         }
 
@@ -857,27 +873,15 @@ fun PredictionFormActivity(
                 .fillMaxWidth(0.875f)
                 .align(alignment = Alignment.CenterHorizontally)
         ) {
-            // DropdownMenuItems for the anxiety level range
             for (i in 0..5) {
                 DropdownMenuItem(onClick = {
                     bullying.value = i.toString()
                     expanded_b = false
                 }) {
-                    Text("$i", color = Color.Black) // Set the text color to black
+                    Text("$i", color = Color.Black)
                 }
             }
         }
-//        TextField(
-//            value = bullying.value,
-//            onValueChange = { bullying.value = it },
-//            label = { Text("bullying Level") },
-//            modifier = Modifier
-//                .fillMaxWidth()
-//                .padding(8.dp)
-//        )
-
-
-
         Button(
             onClick = {
                 predictionViewModel.predict(
@@ -901,21 +905,25 @@ fun PredictionFormActivity(
                     peerPressure.value.toInt(),
                     extracurricularActivities.value.toInt(),
                     bullying.value.toInt(),
-                    )
+                )
                 result.value = true
             },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(8.dp),
+            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Yellow, contentColor = Color.White),
         ) {
             Text("Check")
         }
-
-        if (result.value == true){
-            Text("${showResult.value}")
+        if (result.value) {
+            val resultText = when (showResult.value.toInt()) {
+                0 -> "You're good!"
+                1 -> "Stress has started to build up, make sure to take a rest"
+                2 -> "You're not in good condition, seek help immediately!"
+                else -> "Unknown result"
+            }
+            Text(resultText)
         }
-
-
 
     }
 }
